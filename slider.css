@@ -1,0 +1,73 @@
+:root {
+    /* total amount of images  */
+    --total-img-amount: 12;
+    /* amount of images you want to be hidden at start */
+    --img-amount-hidden: 8;
+    /* amount of images you dont want to be hidden at start */
+    --img-amount-minus-hidden: 4;
+  }
+  body{
+    background-color: #fdf2e9;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .wrap-gallery {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 100px;
+    margin: 3.2rem auto;
+    background: 
+      linear-gradient(#fae5d3e1, #e67e22) border-box;
+    border: 5px solid transparent;
+    width: clamp(28rem, 80%, 100rem);
+  }
+  .img {
+    flex-basis: 100%;
+    height: 200px;
+    position: relative;
+  }
+  
+  .img img {
+    height: 100%;
+    width: 100%;
+    transition: 0.4s;
+    animation-play-state: running; /* Resume the animation by default */
+  }
+  .img img:hover {
+    transform: scale(1.15);
+    cursor: pointer;
+    animation-play-state: paused ;
+  }
+  .slider-images:hover {
+    animation-play-state: paused; /* Pause the animation on hover */
+  }
+  .slider-images {
+    height: 100%;
+    display: flex;
+    margin-left: calc(
+      var(--img-amount-hidden) * (-100% / var(--img-amount-minus-hidden))
+    );
+    animation: imgani 20s linear 2s infinite alternate;
+    position: relative;
+  }
+  @keyframes imgani {
+    0% {
+      left: 0;
+    }
+    5% { /*this is use so when animation alternaes,there is some time before it,without it alternating motion would start immediatly and would be not that comfortable,so basicly if we shoot a ball to the wall it will not bouce immediatle and come back,it will take some time at touching point of wall and the ball and after a second will come back to us,without 5% or 95% stuff this wouldnt happend,ball would came back immediately*/
+      left: 0;
+    } 
+    95% {/*this is use so when animation alternaes,there is some time before it,without it alternating motion would start immediatly and would be not that comfortable,so basicly if we shoot a ball to the wall it will not bouce immediatle and come back,it will take some time at touching point of wall and the ball and after a second will come back to us,without 5% or 95% stuff this wouldnt happend,ball would came back immediately*/
+      left: calc(
+        var(--img-amount-hidden) * (100% / var(--img-amount-minus-hidden))
+      );
+    }
+    100% {
+      left: calc(
+        var(--img-amount-hidden) * (100% / var(--img-amount-minus-hidden))
+      );
+    }
+  }
+  
